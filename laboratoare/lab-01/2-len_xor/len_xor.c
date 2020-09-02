@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define STR_SIZE 512
-
 int my_strlen(const char *str)
 {
 	/* TODO */	
