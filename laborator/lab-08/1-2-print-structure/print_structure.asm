@@ -38,6 +38,17 @@ main:
     push ebp
     mov ebp, esp
 
+    lea ebx, [sample_student + birth_year]
+    mov dx, 1993
+    mov [ebx], dx
+    
+    lea ebx, [sample_student + age]
+    mov dl, 22
+    mov [ebx], dl
+
+    lea ebx, [sample_student + group]
+    mov dx, '3'
+    mov [ebx + 2], dx
     ; TODO: Update name, surname, birth_year, gender and age such that:
     ; birth_year is 1993
     ; age is 22

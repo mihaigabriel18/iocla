@@ -19,19 +19,18 @@ main:
     ; Compute length in eax.
     ; Divide by 4 (we are using integer data type of 4 bytes) by
     ; using shr 2 (shift right with 2 bits).
+    xor rax, rax
     mov eax, len
-    shr eax, 2
+    shr rax, 2
 
-    push rax
-    push arr
+    mov rdi, arr
+    mov rsi, rax
     call get_max
-    add esp, 8
 
     ; Print max.
-    push rax
-    push print_format
+    mov rdi, print_format
+    mov rsi, rax
     call printf
-    add esp, 8
 
     leave
     ret

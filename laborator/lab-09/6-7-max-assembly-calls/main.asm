@@ -4,8 +4,10 @@ extern get_max
 section .data
     arr: dd 19, 7, 129, 87, 54, 218, 67, 12, 19, 99
     len: equ $-arr
+    pos: dd 0
 
     print_format: db "max: %u", 13, 10, 0
+    print_format_pos: db "pos: %u", 13, 10, 0
 
 section .text
 
@@ -21,10 +23,11 @@ main:
     mov eax, len
     shr eax, 2
 
+    push pos
     push eax
     push arr
     call get_max
-    add esp, 8
+    add esp, 0xc
 
     ; Print max.
     push eax
@@ -32,5 +35,10 @@ main:
     call printf
     add esp, 8
 
+    ; Print pos
+    push dword [pos]
+    push print_format_pos
+    call printf
+    add esp, 8
     leave
     ret

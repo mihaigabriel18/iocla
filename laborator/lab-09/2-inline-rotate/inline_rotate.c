@@ -12,13 +12,21 @@ int main(void)
 	/* TODO: Use rol instruction to shift n by 8 bits left.
 	 * Place result in rot_left variable.
 	 */
-
+	"mov eax, %2\n"
+	"rol eax, 0x8\n"
+	"mov %0, eax\n"
 	/* TODO: Use ror instruction to shift n by 8 bits right.
 	 * Place result in rot_right variable.
 	 */
+	"mov eax, %1\n"
+	"ror eax, 0x8\n"
+	"mov %1, eax\n"
 	/* TODO: Declare output variables - preceded by ':'. */
+	: "=r" (rot_left), "=r" (rot_right)
 	/* TODO: Declare input variables - preceded by ':'. */
+	: "r" (n)
 	/* TODO: Declared used registers - preceded by ':'. */
+	: "eax"
 	);
 
 	/* NOTE: Output variables are passed by address, input variables

@@ -24,36 +24,101 @@ section .data
 
 section .text
 extern printf
+extern strcpy
+extern strdup
 global main
 
 get_int:
-    ; TODO --- return the int value from struct
-    ; int get_int(struct my_struct *obj)
+    push ebp
+    mov ebp, esp
+    push ebx
+
+    mov ebx, [ebp + 8]
+    lea ebx, [ebx + int_x]
+    mov eax, [ebx]
+    
+    pop ebx
+    leave
     ret
 
 get_char:
-    ; TODO --- return the char value from struct
-    ; char get_char(struct my_struct *obj)
+    push ebp
+    mov ebp, esp
+    push ebx
+
+    mov ebx, [ebp + 8]
+    lea ebx, [ebx + char_y]
+    mov eax, [ebx]
+    
+    pop ebx
+    leave
     ret
 
 get_string:
-    ; TODO --- return a pointer to the string value from struct
-    ; char* get_string(struct my_struct *obj)
+    push ebp
+    mov ebp, esp
+    push ebx
+
+    mov ebx, [ebp + 8]
+    lea ebx, [ebx + string_s]
+    mov eax, ebx
+    
+    pop ebx
+    leave
     ret
 
 set_int:
-    ; TODO --- set the int value from struct with the new one
-    ; void set_int(struct my_struct *obj, int x)
+    push ebp
+    mov ebp, esp
+    push ebx
+    push ecx
+
+    mov ebx, [ebp + 8]
+    mov ecx, [ebp + 12]
+    lea ebx, [ebx + int_x]
+    mov [ebx], ecx
+    
+    pop ecx
+    pop ebx
+    leave
     ret
 
 set_char:
-    ; TODO --- set the char value from struct with the new one
-    ; void set_char(struct my_struct *obj, char y)
+    push ebp
+    mov ebp, esp
+    push ebx
+    push ecx
+
+    mov ebx, [ebp + 8]
+    mov ecx, [ebp + 12]
+    lea ebx, [ebx + char_y]
+    mov [ebx], ecx
+    
+    pop ecx
+    pop ebx
+    leave
     ret
 
 set_string:
-    ; TODO --- set the string value from struct with the new one
-    ; void set_string(struct my_struct *obj, char* s)
+    push ebp
+    mov ebp, esp
+    push ebx
+    push ecx
+    push eax
+
+    mov ebx, [ebp + 8]
+    push dword [ebp + 12]
+
+    lea ecx, [ebx + string_s]
+    push ecx
+    call strcpy
+    add esp, 8
+
+    
+    pop eax
+    pop ecx
+    pop ebx
+    leave
     ret
 
 main:
@@ -71,10 +136,10 @@ main:
     add esp, 4
 
     ;uncomment when get_int is ready
-    ;push eax
-    ;push int_format
-    ;call printf
-    ;add esp, 8
+    push eax
+    push int_format
+    call printf
+    add esp, 8
 
     movzx edx, byte [new_char]
     ; movzx is the same as
@@ -90,10 +155,10 @@ main:
     add esp, 4
 
     ;uncomment when get_char is ready
-    ;push eax
-    ;push char_format
-    ;call printf
-    ;add esp, 8
+    push eax
+    push char_format
+    call printf
+    add esp, 8
 
     mov edx, new_string
     push edx
@@ -106,10 +171,10 @@ main:
     add esp, 4
 
     ;uncomment when get_string is ready
-    ;push eax
-    ;push string_format
-    ;call printf
-    ;add esp, 8
+    push eax
+    push string_format
+    call printf
+    add esp, 8
 
     xor eax, eax
     leave
